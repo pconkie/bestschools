@@ -63806,10 +63806,12 @@
               });
             }
 
-            // Make your 5 icons
-            const iconGreen   = makeMarkerIcon("#09aa34", 15);
-            const iconBlack   = makeMarkerIcon("#000000", 15);
-            const iconYellow  = makeMarkerIcon("#feb70f", 15);
+             // Make your 5 icons
+            const iconGreen   = makeMarkerIcon("#09aa34",15);
+            const iconTeal    = makeMarkerIcon("#09534d",15);
+            const iconYellow  = makeMarkerIcon("#feb70f",15);
+            const iconPurple  = makeMarkerIcon("#6f1448",15);
+            const iconRed     = makeMarkerIcon("#de0000",15);
 
             // Create map
             const map = L.map('map').setView([51,-3.5], 9); // Center UK
@@ -63821,11 +63823,17 @@
 
             // Add markers with labels
             schools.forEach(p => {
-                var icon = iconBlack;
-                if (p.name == "Backwell School") {
-                    icon = iconYellow;
-                } else if (p.nonselectiveorder < 220) {
+                var icon = iconRed;
+                if (p["overall rating"] == 5) {
                     icon = iconGreen;
+                } else if (p["overall rating"] == 4) {
+                    icon = iconTeal;
+                } else if (p["overall rating"] == 3) {
+                    icon = iconYellow;        
+                } else if (p["overall rating"] == 2) {
+                    icon = iconPurple;        
+                } else if (p["overall rating"] == 1) {
+                    icon = iconRed;  
                 }
                 const tooltip = `${p.name} — Score/40: ${p.totalscore}`;
                 const score = `${p.totalscore}/40`;
