@@ -8,4 +8,54 @@
         <div id="map" style="height:98vh;"></div>
 
         <script>
-            var schools = [
+            var schools = []
+
+            function makeMarkerIcon(color, size = 25) {
+              const height = Math.round(size * 1.64); // keep Leaflet pin aspect ratio (25x41)
+              return L.divIcon({
+                className: "custom-pin",
+                html: `
+                  <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${height}" viewBox="0 0 25 41">
+                    <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 22.5 12.5 41 12.5 41C12.5 41 25 22.5 25 12.5C25 5.6 19.4 0 12.5 0Z" 
+                          fill="${color}" stroke="black" stroke-width="2"/>
+                    <circle cx="12.5" cy="12.5" r="5" fill="white"/>
+                  </svg>
+                `,
+                iconSize: [size, height],
+                iconAnchor: [size / 2, height], // bottom tip is the anchor
+                popupAnchor: [0, -height]
+              });
+            }
+
+            // Make your 5 icons
+            const iconGreen   = makeMarkerIcon("#09aa34", 15);
+            const iconBlack   = makeMarkerIcon("#000000", 15);
+            const iconYellow  = makeMarkerIcon("#feb70f", 15);
+
+            // Create map
+            const map = L.map('map').setView([51,-3.5], 9); // Center UK
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add markers with labels
+            schools.forEach(p => {
+                var icon = iconBlack;
+                if (p.name == "Backwell School") {
+                    icon = iconYellow;
+                } else if (p.nonselectiveorder < 220) {
+                    icon = iconGreen;
+                }
+                const tooltip = `${p.name} — Score/40: ${p.totalscore}`;
+                const score = `${p.totalscore}/40`;
+                L.marker([p.lat, p.long], {icon: icon})
+                    .addTo(map)
+                    .bindPopup(tooltip)   // click label
+                    .bindTooltip(score) // hover label
+            });
+
+        </script>
+    </body>
+</html>
