@@ -6457,28 +6457,29 @@
                     }
                     ]
 
-            function makeMarkerIcon(color) {
-                return L.divIcon({
-                    className: "custom-pin",
-                    html: `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">
-                        <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 22.5 12.5 41 12.5 41C12.5 41 25 22.5 25 12.5C25 5.6 19.4 0 12.5 0Z" 
-                            fill="${color}" stroke="black" stroke-width="2"/>
-                        <circle cx="12.5" cy="12.5" r="5" fill="white"/>
-                    </svg>
-                    `,
-                    iconSize: [25, 41],
-                    iconAnchor: [12.5, 41],  // bottom tip is the anchor
-                    popupAnchor: [0, -41]
-                });
+            function makeMarkerIcon(color, size = 25) {
+              const height = Math.round(size * 1.64); // keep Leaflet pin aspect ratio (25x41)
+              return L.divIcon({
+                className: "custom-pin",
+                html: `
+                  <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${height}" viewBox="0 0 25 41">
+                    <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 22.5 12.5 41 12.5 41C12.5 41 25 22.5 25 12.5C25 5.6 19.4 0 12.5 0Z" 
+                          fill="${color}" stroke="black" stroke-width="2"/>
+                    <circle cx="12.5" cy="12.5" r="5" fill="white"/>
+                  </svg>
+                `,
+                iconSize: [size, height],
+                iconAnchor: [size / 2, height], // bottom tip is the anchor
+                popupAnchor: [0, -height]
+              });
             }
 
             // Make your 5 icons
-            const iconGreen   = makeMarkerIcon("#09aa34");
-            const iconTeal    = makeMarkerIcon("#09534d");
-            const iconYellow  = makeMarkerIcon("#feb70f");
-            const iconPurple  = makeMarkerIcon("#6f1448");
-            const iconRed     = makeMarkerIcon("#de0000");
+            const iconGreen   = makeMarkerIcon("#09aa34",15);
+            const iconTeal    = makeMarkerIcon("#09534d",15);
+            const iconYellow  = makeMarkerIcon("#feb70f",15);
+            const iconPurple  = makeMarkerIcon("#6f1448",15);
+            const iconRed     = makeMarkerIcon("#de0000",15);
 
             // Create map
             const map = L.map('map').setView([51,-3.5], 9); // Center UK
