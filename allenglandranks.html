@@ -63806,6 +63806,13 @@
               });
             }
 
+            function rankToPercent(rankStr, total) {
+              const rank = parseInt(rankStr, 10);
+              if (isNaN(rank) || rank <= 0) return null; // safety check
+            
+              return Math.round((rank / total) * 100);
+            }
+
              // Make your 5 icons
             const iconGreen   = makeMarkerIcon("#09aa34",15);
             const iconTeal    = makeMarkerIcon("#09534d",15);
@@ -63835,7 +63842,21 @@
                 } else if (p["overall rating"] == 1) {
                     icon = iconRed;  
                 }
-                const tooltip = `${p.name} — Score/40: ${p.totalscore}`;
+                const tooltip = `
+                    <div style="width:350px; font-size:14px;">
+                        <table>
+                            <tr><td>School</td><td>${p.name}</td></tr>
+                            <tr><td>A8 Score</td><td>${p.attainment8}</td></tr>
+                            <tr><td>P8 Score</td><td>${p.progress8}</td></tr>
+                            <tr><td>5+ Eng Bacc</td><td>${p.bacculurate5}</td></tr>
+                            <tr><td>Leavers in Edu/work</td><td>${p.educationdest}</td></tr>
+                            <tr><td>Avg. Class Size</td><td>${p.classsizeaverage}</td></tr>
+                            <tr><td>Weighted Score</td><td>${p.totalscore}</td></tr>
+                            <tr><td>Non-selective Ranking</td><td>${p.nonselectiveorder}</td></tr>
+                            <tr><td>Ranking %</td><td>${rankToPercent(p.nonselectiveorder,2900)}</td></tr>
+                        </table>    
+                    </div>
+                `;
                 const score = `${p.totalscore}/40`;
                 L.marker([p.lat, p.long], {icon: icon})
                     .addTo(map)
