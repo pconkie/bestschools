@@ -63820,6 +63820,22 @@
               return Math.round(idec * 100);
             }
 
+            function p8ToStat(p8) {
+              var stat = ""
+              if (p8 == "5") {
+                stat = "Well above avg"
+              } else if (p8 == "4") {
+                stat = "Above avg"
+              } else if (p8 == "3") {
+                stat = "Average"
+              } else if (p8 == "2") {
+                stat = "Below avg"
+              } else if (p8 == "1") {
+                stat = "Well below avg"
+              }
+              return stat
+            }
+
              // Make your 5 icons
             const iconGreen   = makeMarkerIcon("#09aa34",15);
             const iconTeal    = makeMarkerIcon("#09534d",15);
@@ -63855,11 +63871,11 @@
                         <table style="border-collapse:collapse; width:100%; font-size:14px;">
                             <tr><td colspan="2" style="border:1px solid black;"><b>${p.name}</b></td></tr>
                             <tr><td style="border:1px solid black;">A8 Score</td><td style="border:1px solid black;">${p.attainment8}</td></tr>
-                            <tr><td style="border:1px solid black;">P8 Score</td><td style="border:1px solid black;">${p.progress8}</td></tr>
+                            <tr><td style="border:1px solid black;">P8 Score</td><td style="border:1px solid black;">${p8ToStat(p.progress8)}</td></tr>
                             <tr><td style="border:1px solid black;">5+ Eng Bacc</td><td style="border:1px solid black;">${p.bacculurate5}</td></tr>
                             <tr><td style="border:1px solid black;">Leavers in Edu/work</td><td style="border:1px solid black;">${decToPercent(p.educationdest)}%</td></tr>
                             <tr><td style="border:1px solid black;">Avg. Class Size</td><td style="border:1px solid black;">${p.classsizeaverage}</td></tr>
-                            <tr><td style="border:1px solid black;"><b>Weighted Score</b></td><td style="border:1px solid black;"><b>${p.totalscore}</b></td></tr>
+                            <tr><td style="border:1px solid black;"><b>Weighted Score</b></td><td style="border:1px solid black;"><b>${p.totalscore}/40</b></td></tr>
                             <tr><td style="border:1px solid black;">Non-selective School Rank</td><td style="border:1px solid black;">${p.nonselectiveorder}</td></tr>
                             <tr><td style="border:1px solid black;">Non-selective School Rank %</td><td style="border:1px solid black;">${rankToPercent(p.nonselectiveorder,2900)}%</td></tr>
                         </table>    
