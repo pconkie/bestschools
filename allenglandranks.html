@@ -63821,8 +63821,8 @@
             }
 
             function recolour(rank) {
-                markers.forEach(m => {
-                    
+                schools.forEach(p => {
+                    p.marker.setIcon(iconBlue)
                 });
             }
 
@@ -63913,8 +63913,7 @@
                     .addTo(map)
                     .bindPopup(tooltip)   // click label
                     .bindTooltip(score) // hover label
-                p.mapdata = []
-                p.mapdata.push(m)
+                p.marker = m
             });
 
         </script>
