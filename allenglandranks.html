@@ -63814,7 +63814,7 @@
             }
 
             function decToPercent(dec) {
-              const idec = parseInt(dec, 10);
+              const idec = parseFloat(dec, 10);
               if (isNaN(idec) || idec <= 0) return null; // safety check
             
               return Math.round(idec * 100);
