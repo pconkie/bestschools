@@ -63880,7 +63880,8 @@
                             <tr><td style="border:1px solid black;"><b>Weighted Score</b></td><td style="border:1px solid black;"><b>${p.totalscore}/40</b></td></tr>
                             <tr><td style="border:1px solid black;">Non-selective School Rank</td><td style="border:1px solid black;">${p.nonselectiveorder}</td></tr>
                             <tr><td style="border:1px solid black;">Non-selective School Rank %</td><td style="border:1px solid black;">Top ${rankToPercent(p.nonselectiveorder,2900)}%</td></tr>
-                        </table>    
+                        </table>
+                        <button onclick="recolour(${p.nonselectiveorder})">Show schools ranked higher then this one</button>
                     </div>
                 `;
                 } else {
