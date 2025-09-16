@@ -63788,8 +63788,6 @@
     "long": "-0.842731"
   }
 ]
-
-            const markers = [];
             
             function makeMarkerIcon(color, size = 25) {
               const height = Math.round(size * 1.64); // keep Leaflet pin aspect ratio (25x41)
@@ -63823,11 +63821,13 @@
             }
 
             function recolour(rank) {
-
+                markers.forEach(m => {
+                    
+                }
             }
 
             function reset(rank) {
-
+                console.log(schools)
             }
 
             function p8ToStat(p8) {
@@ -63913,7 +63913,7 @@
                     .addTo(map)
                     .bindPopup(tooltip)   // click label
                     .bindTooltip(score) // hover label
-                markers.push(m)
+                p.mapdata.push(m)
             });
 
         </script>
