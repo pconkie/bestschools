@@ -63822,7 +63822,13 @@
 
             function recolour(rank) {
                 schools.forEach(p => {
-                    p.marker.setIcon(iconBlue)
+                    if (p.nonselectiveorder == rank) {
+                        p.marker.setIcon(iconBlue)
+                    } else if (p.nonselectiveorder < rank) {
+                        p.marker.setIcon(iconMagenta)
+                    } else {
+                        p.marker.setIcon(iconBlack)
+                    }
                 });
             }
 
