@@ -63789,6 +63789,8 @@
   }
 ]
 
+            const markers = [];
+            
             function makeMarkerIcon(color, size = 25) {
               const height = Math.round(size * 1.64); // keep Leaflet pin aspect ratio (25x41)
               return L.divIcon({
@@ -63820,6 +63822,14 @@
               return Math.round(idec * 100);
             }
 
+            function recolour(rank) {
+
+            }
+
+            function reset(rank) {
+
+            }
+
             function p8ToStat(p8) {
               var stat = ""
               if (p8 == "5") {
@@ -63842,6 +63852,10 @@
             const iconYellow  = makeMarkerIcon("#feb70f",15);
             const iconPurple  = makeMarkerIcon("#6f1448",15);
             const iconRed     = makeMarkerIcon("#de0000",15);
+
+            const iconBlue   = makeMarkerIcon("#0000FF", 15);
+            const iconBlack   = makeMarkerIcon("#000000", 15);
+            const iconMagenta  = makeMarkerIcon("#FF1DCE", 15);
 
             // Create map
             const map = L.map('map').setView([51,-3.5], 9); // Center UK
@@ -63881,7 +63895,8 @@
                             <tr><td style="border:1px solid black;">Non-selective School Rank</td><td style="border:1px solid black;">${p.nonselectiveorder}</td></tr>
                             <tr><td style="border:1px solid black;">Non-selective School Rank %</td><td style="border:1px solid black;">Top ${rankToPercent(p.nonselectiveorder,2900)}%</td></tr>
                         </table>
-                        <button onclick="recolour(${p.nonselectiveorder})">Show schools ranked higher then this one</button>
+                        <button style="width:100%;" onclick="recolour(${p.nonselectiveorder})">Show schools ranked higher then this one</button>
+                        <button style="width:100%;" onclick="reset(${p.nonselectiveorder})">Reset</button>
                     </div>
                 `;
                 } else {
@@ -63894,10 +63909,11 @@
                 `;
                 }
 
-                L.marker([p.lat, p.long], {icon: icon})
+                const m = L.marker([p.lat, p.long], {icon: icon})
                     .addTo(map)
                     .bindPopup(tooltip)   // click label
                     .bindTooltip(score) // hover label
+                markers.push(m)
             });
 
         </script>
