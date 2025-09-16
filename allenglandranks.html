@@ -63813,6 +63813,13 @@
               return Math.round((rank / total) * 100);
             }
 
+            function decToPercent(dec) {
+              const idec = parseInt(dec, 10);
+              if (isNaN(idec) || idec <= 0) return null; // safety check
+            
+              return Math.round(idec * 100);
+            }
+
              // Make your 5 icons
             const iconGreen   = makeMarkerIcon("#09aa34",15);
             const iconTeal    = makeMarkerIcon("#09534d",15);
@@ -63844,17 +63851,17 @@
                 }
                 const score = `${p.totalscore} / 40`
                 const tooltip = `
-                    <div style="width:350px; font-size:14px;">
+                    <div style="width:300px; font-size:14px;">
                         <table style="border-collapse:collapse; width:100%; font-size:14px;">
                             <tr><td colspan="2" style="border:1px solid black;">${p.name}</td></tr>
-                            <tr><td style="border:1px solid black;">A8 Score</td><td>${p.attainment8}</td></tr>
-                            <tr><td style="border:1px solid black;">P8 Score</td><td>${p.progress8}</td></tr>
-                            <tr><td style="border:1px solid black;">5+ Eng Bacc</td><td>${p.bacculurate5}</td></tr>
-                            <tr><td style="border:1px solid black;">Leavers in Edu/work</td><td>${p.educationdest}</td></tr>
-                            <tr><td style="border:1px solid black;">Avg. Class Size</td><td>${p.classsizeaverage}</td></tr>
-                            <tr><td style="border:1px solid black;">Weighted Score</td><td>${p.totalscore}</td></tr>
-                            <tr><td style="border:1px solid black;">Non-selective Ranking</td><td>${p.nonselectiveorder}</td></tr>
-                            <tr><td style="border:1px solid black;">Ranking %</td><td>${rankToPercent(p.nonselectiveorder,2900)}</td></tr>
+                            <tr><td style="border:1px solid black;">A8 Score</td><td style="border:1px solid black;">${p.attainment8}</td></tr>
+                            <tr><td style="border:1px solid black;">P8 Score</td><td style="border:1px solid black;">${p.progress8}</td></tr>
+                            <tr><td style="border:1px solid black;">5+ Eng Bacc</td><td style="border:1px solid black;">${p.bacculurate5}</td></tr>
+                            <tr><td style="border:1px solid black;">Leavers in Edu/work</td><td style="border:1px solid black;">${decToPercent(p.educationdest)%}</td></tr>
+                            <tr><td style="border:1px solid black;">Avg. Class Size</td><td style="border:1px solid black;">${p.classsizeaverage}</td></tr>
+                            <tr><td style="border:1px solid black;">Weighted Score</td><td style="border:1px solid black;">${p.totalscore}</td></tr>
+                            <tr><td style="border:1px solid black;">Non-selective Ranking</td><td style="border:1px solid black;">${p.nonselectiveorder}</td></tr>
+                            <tr><td style="border:1px solid black;">Non-selective Ranking %</td><td style="border:1px solid black;">${rankToPercent(p.nonselectiveorder,2900)%}</td></tr>
                         </table>    
                     </div>
                 `;
