@@ -63866,7 +63866,9 @@
                     icon = iconRed;  
                 }
                 const score = `${p.totalscore} / 40`
-                const tooltip = `
+                var tooltip
+                if (p.totalscore !== '') {
+                    tooltip = `
                     <div style="width:300px; font-size:14px;">
                         <table style="border-collapse:collapse; width:100%; font-size:14px;">
                             <tr><td colspan="2" style="border:1px solid black;"><b>${p.name}</b></td></tr>
@@ -63881,6 +63883,15 @@
                         </table>    
                     </div>
                 `;
+                } else {
+                    tooltip = `
+                    <div style="width:300px; font-size:14px;">
+                        <table style="border-collapse:collapse; width:100%; font-size:14px;">
+                            <tr><td colspan="2" style="border:1px solid black;"><b>${p.name}</b></td></tr>
+                        </table>    
+                    </div>
+                `;
+                }
 
                 L.marker([p.lat, p.long], {icon: icon})
                     .addTo(map)
