@@ -63833,6 +63833,10 @@
             }
 
             function reset(rank) {
+                schools.forEach(p => {
+                   p.marker.setIcon(p.icon)
+                });
+                
                 console.log(schools)
             }
 
@@ -63919,6 +63923,7 @@
                     .addTo(map)
                     .bindPopup(tooltip)   // click label
                     .bindTooltip(score) // hover label
+                p.icon = icon
                 p.marker = m
             });
 
